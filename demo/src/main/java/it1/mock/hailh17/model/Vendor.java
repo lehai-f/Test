@@ -27,6 +27,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * entity vendor
+ * @author HaiLH17
+ * @BirthDate: 1994/07/07
+ */
 public class Vendor {
 	@Id
 	@Column(name = "Vendor_ID")
