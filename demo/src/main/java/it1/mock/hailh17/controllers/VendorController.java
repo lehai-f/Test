@@ -149,5 +149,11 @@ public class VendorController {
 		rd.addFlashAttribute("id",id);
 		return "redirect:/vendor/list?page="+page;
 	}
+	
+	@GetMapping("/add")
+	public String showFormAdd(Model model) {
+		model.addAttribute("vendor", new Vendor());
+		return "add";
+	}
 		
 }
