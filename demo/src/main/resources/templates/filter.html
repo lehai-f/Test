@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{/fontawesome/css/all.css}">
+  <link rel="stylesheet" th:href="@{/css/select2.min.css}">
+  <link rel="stylesheet" th:href="@{/css/select2.min2.css}">
+
+</head>
+
+<body>
+  <div class="container-fluid px-5 py-3">
+    <div class="row rounded-top py-2" style="background-color: #bcbcbc">
+      <div class="close-button" style="padding: 5px; border:black solid 1px; 
+             width: 30px; border-radius: 7px;
+             background-color: white;
+             margin-left: 20px;
+             height: 30px;">
+        <div class="h-100 w-100 d-flex justify-content-center align-items-center" style="background-image: linear-gradient(rgba(129, 190, 236, 1), rgba(80, 130, 167, 1)); 
+                box-shadow: 0px 1px 4px 1px;">
+          <i class="fa-solid fa-minus" style="color: #ffffff;"></i>
+        </div>
+      </div>
+      <div class="col">
+        <h5 style="color: #005362">List Vendor Resources...</h5>
+      </div>
+    </div>
+    <div class="row px-3 py-4" style="background-color: #e3e3e3 ;">
+       <form th:action="@{/vendor/filter}">
+        <div class="row">
+          <div class="" style="width: 9%;">Vendor Name: </div>
+          <div style="width: 16%;">
+            <select list="selectName" id="inputName" type="text" class="js-select2 rounded-0 " name="vdName" maxlength="50" >
+              <option class="text-center" value="All"> -----------All---------- </option>
+              <option th:each="c : ${nameFilter}" th:value="${c.vendorName}" th:text="${c.vendorName}" th:selected="${c.vendorName.equals(vdName)}"></option>
+            </select>
+          </div>
+          <div style="width: 7%;">
+            <button type="submit" class="w-100">Filter</button>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div style="width: 9%;">Country: </div>
+          <div style="width: 16%;">
+            <select id="inputCountry" type="text" class="js-select2 form-select form-select-sm rounded-0" name="ctry"
+              maxlength="50">
+              <option class="text-center" value="All"> -----------All---------- </option>
+              <option class="countryValue" th:each="c : ${countries}" th:value="${c.countryName}"
+                th:text="${c.countryName}" th:selected="${c.countryName.equals(ctry)}"></option>
+            </select>
+          </div>
+        </div>
+      </form>
+      <div class="table-responsive mb-3">
+        <table class="table-active table-bordered border-success text-center col-6">
+          <thead style="background-color: #bcbcbc;">
+            <tr class="text-white">
+              <th class="col-4">Vendor Name</th>
+              <th class="col-3">Country</th>
+              <th class="col-1">Staff Strength</th>
+              <th class="col-2">Number Of Working Days (Per week )</th>
+            </tr>
+          </thead>
+          <tbody class="vendorBody">
+            <tr th:if="${mest} != null">
+              <td colspan="4" th:text="${mest}" class="text-danger"></td>
+            </tr>
+            <tr th:each="vendor,index : ${vendors}">
+              <td class="text-start px-5">
+                <a th:href="@{/vendor/update/{id}(id=${vendor.vendorID})}" th:text="${vendor.vendorName}"></a>
+              </td>
+              <td class="text-start px-5" th:text="${vendor.country.countryName}"></td>
+              <td th:text="${vendor.staffStrength}"></td>
+              <td th:text="${vendor.numberOfWorkingDays}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <div class="col-7">
+          <div class="row">
+            <div class="col-2"><button type="button" class="w-100 h-100">Add</button></div>
+            <div class="col-9" style="padding-right: 37px;">
+
+              <nav>
+                <ul class="pagination pagination-sm m-0 justify-content-end">
+                  <li class="page-item ms-1">
+                    <a th:href="@{/vendor/filter(page=${0},vdName=${vdName},ctry=${ctry})}" class="page-link"
+                      aria-current="page">
+                      <i class="fa-solid fa-backward-step"></i>
+                    </a>
+                  </li>
+
+                  <li class="page-item ms-1">
+                    <a class="page-link" href="#" aria-label="Previous"
+                      th:href="@{${crPage > 0} ? @{/vendor/filter(page=${crPage-1},vdName=${vdName},ctry=${ctry})} : @{#}}">
+                      <i class="fa-solid fa-backward"></i>
+                    </a>
+                  </li>
+                  <th:block th:if="${ttPage > 0}">
+                    <th:block th:each="i : ${#numbers.sequence(0, ttPage-1)}">
+                      <li class="page-item ms-1">
+                        <a class="page-link" th:classappend="${crPage == i} ? 'activez' : ''"
+                          th:href="@{/vendor/filter(page=${i},vdName=${vdName},ctry=${ctry})}"><span
+                            th:text="${i + 1}"></span></a>
+                      </li>
+                    </th:block>
+                  </th:block>
+
+                  <li class="page-item ms-1">
+                    <a class="page-link" href="#" aria-label="Next"
+                      th:href="@{${crPage < ttPage-1} ? @{/vendor/filter(page=${crPage+1},vdName=${vdName},ctry=${ctry})} : @{#}}">
+                      <i class="fa-solid fa-forward"></i>
+                    </a>
+                  </li>
+
+                  <li class="page-item ms-1">
+                    <a class="page-link"
+                      th:href="@{${ttPage > 1} ? @{/vendor/filter(page=${ttPage-1},vdName=${vdName},ctry=${ctry})} : @{#}} ">
+                      <i class="fa-solid fa-forward-step"></i>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JavaScript Libraries -->
+  <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+  <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+  <script th:src="@{/jQuery/code.jquery.com_jquery-3.7.0.min.js}"></script>
+  <script th:src="@{/jQuery/poper.min.js}"></script>
+  <script th:src="@{/jQuery/select2.min.js}"></script>
+  <script th:src="@{/jQuery/mock.js}"></script>
+</body>
+
+</html>

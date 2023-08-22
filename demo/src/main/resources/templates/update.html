@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{/fontawesome/css/all.css}">
+  <link rel="stylesheet" th:href="@{/css/select2.min.css}">
+  <link rel="stylesheet" th:href="@{/css/select2.min2.css}">
+
+</head>
+
+<body>
+  <div class="container-fluid px-5 py-3">
+    <div class="row rounded-top py-2" style="background-color: #bcbcbc">
+      <div class="close-button " style="padding: 5px; border:black solid 1px; 
+             width: 30px; border-radius: 7px;
+             background-color: white;
+             margin-left: 20px;
+             height: 27px;">
+        <div class="h-100 w-100 d-flex justify-content-center align-items-center" style="background-image: linear-gradient(rgba(129, 190, 236, 1), rgba(80, 130, 167, 1)); 
+                box-shadow: 0px 1px 4px 1px;">
+          <i class="fa-solid fa-minus" style="color: #ffffff;"></i>
+        </div>
+      </div>
+      <div class="col">
+        <h5 class="m-0 " style="color: #005362">Update Vendor Resource...</h5>
+      </div>
+    </div>
+    <div class="row px-3 py-4" style="background-color: #e3e3e3 ;">
+      <div class="px-3 py-4" style="border: 1px solid rgba(0, 0, 0, 0.363);">
+        <form id="formInput" th:action="@{/vendor/update/{id}(id=${vendor.vendorID})}" th:object="${vendor}"
+          method="POST">
+          <div class="row">
+            <div class="col-lg-5 col-xl-4 col-md-8 col-sm-12 mb-3">
+              <div class="row justify-content-between mb-3">
+                <div class="col-5 fw-semibold textSty">Vendor Name<span style="color: red">*</span> :</div>
+                <input id="vendorID" type="hidden" th:field="*{vendorID}">
+                <input type="hidden" th:field="*{vdUpTime}">
+                <div class="col-7">
+                  <input id="vendorName" type="text" class="form-control form-control-sm rounded-0 w-100"
+                    aria-describedby="helpId" th:field="*{vendorName}" maxlength="50">
+                  <p th:if="${#fields.hasErrors('vendorName')}" class="text-danger m-0 p-0" th:errors="*{vendorName}">
+                  </p>
+                </div>
+                <span class="form-message text-danger text-end"></span>
+              </div>
+
+              <div class="row justify-content-between">
+                <div class="col-5 fw-semibold textSty">Country :</div>
+                <div class="col-7">
+                  <div class="row">
+                    <div class="col" th:if="${#lists.isEmpty(vendor.schedules)}">
+                      <input type="hidden" th:field="*{country.countryID}">
+                      <select id="inputCountry" class="js-select2" aria-describedby="helpId"
+                        th:field="*{country.countryName}">
+                        <option class="countryValue" th:each="c : ${countries}" th:value="${c.countryName}"
+                          th:text="${c.countryName}"></option>
+                      </select>
+                      <p th:if="${#fields.hasErrors('country.countryName')}" class="text-danger m-0 p-0"
+                        th:errors="*{country.countryName}"></p>
+                    </div>
+                    
+                    <div class="col mb-3" th:if="${!#lists.isEmpty(vendor.schedules)}">
+                      <input type="hidden" th:field="*{country.countryID}">
+                      <input id="inputCountry" type="hidden" th:field="*{country.countryName}">
+                      <p class="text-end m-0 textSty" th:text="${vendor.country.countryName}"></p>
+                      <p th:if="${#fields.hasErrors('country.countryName')}" class="text-danger m-0 p-0"
+                        th:errors="*{country.countryName}"></p>
+                    </div>
+
+                    <span class="form-message text-danger text-end"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row justify-content-between mb-3">
+                <div class="col-6 fw-semibold textSty">Staff Strength<span style="color: red">*</span> :</div>
+                <div class="col-3 text-end">
+                  <input id="staffTotal" type="number" class="form-control form-control-sm rounded-0" name=""
+                    aria-describedby="helpId" placeholder="" th:field="*{staffStrength}"
+                    style="margin-left: 40%; width: 60%">
+                  <p th:if="${#fields.hasErrors('staffStrength')}" class="text-danger m-0 p-0"
+                    th:errors="*{staffStrength}"></p>
+                </div>
+                <span class="form-message text-danger text-end"></span>
+              </div>
+
+              <div class="row justify-content-between">
+                <div class="col fw-semibold textSty">
+					Number of Working Days (Per Week)<span style="color: red">*</span> :</div>
+                <div class="col-3 text-end">
+                  <input id="workDay" type="number" class="form-control form-control-sm rounded-0" name=""
+                    aria-describedby="helpId" placeholder="" th:field="*{numberOfWorkingDays}"
+                    style="margin-left: 40%; width: 60%">
+                  <p th:if="${#fields.hasErrors('numberOfWorkingDays')}" class="text-danger m-0 p-0"
+                    th:errors="*{numberOfWorkingDays}"></p>
+                </div>
+                <span class="form-message text-danger text-end"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col fw-semibold mb-3 textSty">Agreed Fares Records Per Day</div>
+            <div class="table-responsive mb-2 px-4">
+              <div th:if="${udError}" class="col text-center">
+                <p th:text="${udError}" class="error-message text-danger"></p>
+              </div>
+              <table class="w-100 table-bordered border-success text-center">
+                <thead style="background-color: #bcbcbc;">
+                  <tr class="text-white">
+                    <th style="width: 23.75%">Start Date (dd/mm/yyyy)<span style="color: red;">*</span></th>
+                    <th style="width: 23.75%">End Date (dd/mm/yyyy)<span style="color: red;">*</span></th>
+                    <th style="width: 23.75%">Number Of Staff<span style="color: red;">*</span></th>
+                    <th style="width: 23.75%">Records per Day<span style="color: red;">*</span></th>
+                    <th style="width: 5%"></th>
+                  </tr>
+                </thead>
+                <tbody id="agreedBody">
+                  <tr class="" th:each="xxx ,contractIndex: *{schedules}">
+                    <td class="py-1">
+                      <input type="date" class="form-control form-control-sm rounded-0 w-75" aria-describedby="helpId"
+                        th:field="*{schedules[__${contractIndex.index}__].startDate}" style="margin-left: 12.5%;">
+                      <span th:if="${#fields.hasErrors('schedules[__${contractIndex.index}__].startDate')}"
+                        th:errors="*{schedules[__${contractIndex.index}__].startDate}" class="text-danger"></span>
+                      <p id="helpId" class="form-message form-text text-sm text-danger m-0"></p>
+                    </td>
+                    <td class="py-1">
+                      <input type="date" class="form-control form-control-sm rounded-0 w-75" aria-describedby="helpId"
+                        th:field="*{schedules[__${contractIndex.index}__].endDate}" style="margin-left: 12.5%;">
+                      <span th:if="${#fields.hasErrors('schedules[__${contractIndex.index}__].endDate')}"
+                        th:errors="*{schedules[__${contractIndex.index}__].endDate}" class="text-danger"></span>
+                      <p id="helpId" class="form-message form-text text-sm text-danger m-0"></p>
+                    </td>
+                    <td class="py-1">
+                      <input type="number" class="form-control form-control-sm rounded-0 w-75" aria-describedby="helpId"
+                        th:field="*{schedules[__${contractIndex.index}__].numberStaff}" style="margin-left: 12.5%;">
+                      <span th:if="${#fields.hasErrors('schedules[__${contractIndex.index}__].numberStaff')}"
+                        th:errors="*{schedules[__${contractIndex.index}__].numberStaff}" class="text-danger"></span>
+                      <p id="helpId" class="form-message form-text text-sm text-danger m-0"></p>
+                    </td>
+                    <td class="py-1">
+                      <input type="number" class="form-control form-control-sm rounded-0 w-75" aria-describedby="helpId"
+                        th:field="*{schedules[__${contractIndex.index}__].recordPerDay}" style="margin-left: 12.5%;">
+                      <span th:if="${#fields.hasErrors('schedules[__${contractIndex.index}__].recordPerDay')}"
+                        th:errors="*{schedules[__${contractIndex.index}__].recordPerDay}" class="text-danger"></span>
+                      <p id="helpId" class="form-message form-text text-sm text-danger m-0"></p>
+                    </td>
+                    <td>
+                      <a href="javascript:void(0);" onclick="showConfirmation(this)" data-bs-toggle="modal"
+                        data-bs-target="#confirmModal"><img th:src="@{/img/x.png}" alt="" style="height: 30px;"></a>
+                      <input type="hidden" th:field="*{schedules[__${contractIndex.index}__].scheduleID}">
+                      <input type="hidden" th:field="*{schedules[__${contractIndex.index}__].scheUpTime}">
+                    </td>
+                  </tr>
+
+                </tbody>
+                <tfoot>
+                  <td colspan="5" class="text-start p-2"><a id="addmore" th:href="@{#}" class="fw-bold">Add more</a>
+                  </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <div id="rowBtn" class="row justify-content-center gap-3">
+              <input type="hidden" th:name="pageA" th:value="${pageA}">
+              <button type="reset" class="col-1">Clear</button>
+              <button type="submit" class="col-1">Update</button>
+              <a class="col-1 p-0" th:href="@{/vendor/list}">
+                <button type="button" class="w-100">Cancel</button>
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header py-2 px-3">
+          <h5 class="modal-title text-center" id="confirmModalLabel">[JavaScript Application]</h5>
+          <button type="button" class="p-0" data-bs-dismiss="modal" aria-label="Close">
+            <img th:src="@{/img/close-window.png}" alt="close" class="" style="width:40px; height: 40px;">
+          </button>
+        </div>
+        <div class="modal-body d-flex py-2">
+          <img th:src="@{/img/small-help.png}" alt="close" class="me-3">
+          <p class="m-0">Are you sure you want to delete record ?</p>
+        </div>
+        <div class="modal-footer d-flex justify-content-center p-0 border-0 mb-3">
+          <button type="button" class="w-25" onclick="confirmDel()">Ok</button>
+          <button type="button" class="w-25" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Bootstrap JavaScript Libraries -->
+  <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+  <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+  <script th:src="@{/jQuery/code.jquery.com_jquery-3.7.0.min.js}"></script>
+  <script th:src="@{/jQuery/poper.min.js}"></script>
+  <script th:src="@{/jQuery/select2.min.js}"></script>
+  <script th:src="@{/jQuery/mock.js}"></script>
+  <script>
+    $(document).ready(function () {
+      var agreedCount = $("#agreedBody tr").length;
+      $("#addmore").click(function (e) {
+        agreedCount++;
+        var newRow = `
+            <tr>
+                <td class="py-1">
+                    <input type="date" class="form-control form-control-sm rounded-0 w-75" aria-describedby="helpId"
+                     id="schedules${agreedCount - 1}.startDate" name="schedules[${agreedCount - 1}].startDate" style="margin-left: 12.5%;">
+                      <p id="helpId" class="form-message form-text text-sm text-danger m-0"></p>
+                      <span th:if="\${#fields.hasErrors('schedules[${agreedCount - 1}].startDate')}" class="text-danger"></span>                 
+                </td>
+                <td>
+                    <input type="date" class="form-control form-control-sm rounded-0 w-75" aria-describedby="helpId"
+                     id="schedules${agreedCount - 1}.endDate" name="schedules[${agreedCount - 1}].endDate" style="margin-left: 12.5%;">
+                     <p id="helpId" class="form-message form-text text-sml text-danger m-0"></p>
+                     <span th:if="\${#fields.hasErrors('schedules[${agreedCount - 1}].endDate')}" class="text-danger"></span>
+                </td>
+                <td>
+                    <input type="number" class="form-control form-control-sm rounded-0 w-75" aria-describedby="helpId"
+                     id="schedules${agreedCount - 1}.numberStaff"  name="schedules[${agreedCount - 1}].numberStaff" value="0" style="margin-left: 12.5%;">
+                     <p id="helpId" class="form-message form-text text-sm text-danger m-0"></p>
+                     <span th:if="\${#fields.hasErrors('schedules[${agreedCount - 1}].numberStaff')}" class="text-danger"></span>  
+                </td>
+                <td>
+                    <input type="number" class="form-control form-control-sm rounded-0 w-75" aria-describedby="helpId"
+                     id="schedules${agreedCount - 1}.recordPerDay"  name="schedules[${agreedCount - 1}].recordPerDay" value="0" style="margin-left: 12.5%;">
+                     <p id="helpId" class="form-message form-text text-sm text-danger m-0"></p>
+                     <span th:if="\${#fields.hasErrors('schedules[${agreedCount - 1}].recordPerDay')}" class="text-danger"></span>
+                </td>
+                <td>
+                    <a href="javascript:void(0);" onclick="showConfirmation(this)" data-bs-toggle="modal"
+                        data-bs-target="#confirmModal"><img src="/img/x.png" alt="" style="height: 30px;"></a>
+                    <input type="hidden" name="schedules[${agreedCount - 1}].scheduleID" value="0">   
+                </td>
+            </tr>
+        `;
+        $("#agreedBody").append(newRow);
+      })
+    });
+  </script>
+
+  <script>
+    function showConfirmation(element) {
+      $('#confirmModal').modal('show');
+      // Lưu ID vào biến toàn cục để sử dụng trong hàm confirmDelete()
+      var id = $(element).next().val();
+      window.deleteId = id;
+      window.element = element;
+    }
+    function confirmDel() {
+      var id = window.deleteId;
+      var element = window.element;
+      if (id == 0) {
+        delete1(element);
+      } else {
+        var vdID = $("#vendorID").val();
+        var absolutePath = window.location.origin + "/schedule/delete?id=" + id + "&vdID=" + vdID;
+        window.location.href = absolutePath;
+      }
+      $('#confirmModal').modal('hide');
+      $("document").ready(function () {
+        $(".modal-backdrop").remove();
+      })
+    }
+
+    function delete1(e) {
+      e.closest("tr").remove();
+    }
+  </script>
+
+</body>
+
+</html>

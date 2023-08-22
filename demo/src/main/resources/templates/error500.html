@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet" th:href="@{/fontawesome/css/all.css}">
+</head>
+
+<body>
+	<div class="container-fluid px-5 py-3">
+		<div class="row rounded-top py-2" style="background-color: #bcbcbc">
+			<div class="close-button " style="padding: 5px; border:black solid 1px; 
+				   width: 30px; border-radius: 7px;
+				   background-color: white;
+				   margin-left: 20px;
+				   height: 27px;">
+			  <div class="h-100 w-100 d-flex justify-content-center align-items-center" style="background-image: linear-gradient(rgba(129, 190, 236, 1), rgba(80, 130, 167, 1)); 
+					  box-shadow: 0px 1px 4px 1px;">
+				<i class="fa-solid fa-minus" style="color: #ffffff;"></i>
+			  </div>
+			</div>
+			<div class="col">
+			  <h5 class="m-0" style="color: #005362">Configuration...</h5>
+			</div>
+		  </div>
+		<div id="add-new-content" class="text-center my-5">
+			<h1>Database connection error</h1>
+			<p>Sorry, something went wrong on the server.</p>
+			<button class="btn btn-primary mt-3" type="button" onclick="goBack()">Go
+				Back</button>
+		</div>
+
+		<script type="text/javascript">
+			function goBack() {
+				window.history.back();
+			}
+		</script>
+</body>
+
+</html>
