@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <div class="container-fluid px-5 py-3">
+  <div class="container px-5 py-3">
     <div class="row rounded-top py-2" style="background-color: #bcbcbc">
       <div class="close-button" style="padding: 5px; border:black solid 1px; 
              width: 30px; border-radius: 7px;
@@ -34,33 +34,33 @@
       </div>
     </div>
     <div class="row px-3 py-4" style="background-color: #e3e3e3 ;">
-       <form th:action="@{/vendor/filter}">
-        <div class="row">
-          <div class="" style="width: 9%;">Vendor Name: </div>
-          <div style="width: 16%;">
-            <select list="selectName" id="inputName" type="text" class="js-select2 rounded-0 " name="vdName" maxlength="50" >
-              <option class="text-center" value="All"> -----------All---------- </option>
-              <option th:each="c : ${nameFilter}" th:value="${c.vendorName}" th:text="${c.vendorName}" th:selected="${c.vendorName.equals(vdName)}"></option>
+       <form th:action="@{/vendor/filter}" class="m-2" style="height:95px;">
+        <div class="row" style="height:45px;">
+          <div class="" style="width: 11%;">Vendor Name: </div>
+          <div style="width: 220px;">
+            <select id="inputName" type="text" class="js-select2 form-select py-0" name="vdName">
+              <option value=""> -----------All---------- </option>
+              <option th:each="c : ${nameFilter}" th:value="${c.vendorName}" th:text="${c.vendorName}" th:selected="${c.vendorName.equals(vdName)}">
+              </option>
             </select>
           </div>
-          <div style="width: 7%;">
+          <div style="width: 110px;">
             <button type="submit" class="w-100">Filter</button>
           </div>
         </div>
-        <div class="row mb-4">
-          <div style="width: 9%;">Country: </div>
-          <div style="width: 16%;">
-            <select id="inputCountry" type="text" class="js-select2 form-select form-select-sm rounded-0" name="ctry"
-              maxlength="50">
-              <option class="text-center" value="All"> -----------All---------- </option>
-              <option class="countryValue" th:each="c : ${countries}" th:value="${c.countryName}"
-                th:text="${c.countryName}" th:selected="${c.countryName.equals(ctry)}"></option>
+        <div class="row">
+          <div style="width: 11%;">Country: </div>
+          <div style="width: 220px;">
+            <select id="inputCountry" type="text" class="js-select2 form-select py-0" name="ctry">
+              <option value=""> -----------All---------- </option>
+              <option class="countryValue" th:each="c : ${countries}" th:value="${c.countryName}" th:selected="${c.countryName.equals(ctry)}"
+                th:text="${c.countryName}"></option>
             </select>
           </div>
         </div>
       </form>
       <div class="table-responsive mb-3">
-        <table class="table-active table-bordered border-success text-center col-6">
+        <table class="table-active table-bordered border-success text-center col-7">
           <thead style="background-color: #bcbcbc;">
             <tr class="text-white">
               <th class="col-4">Vendor Name</th>
@@ -84,16 +84,17 @@
           </tbody>
         </table>
       </div>
-      <div class="row">
+      <div class="col">
         <div class="col-7">
           <div class="row">
-            <div class="col-2"><a th:href="@{/vendor/add}"><button type="button" class="w-100 h-100">Add</button></a></div>
-            <div class="col-9" style="padding-right: 37px;">
-
+            <div class="col-2">
+			 <a th:href="@{/vendor/add}"><button type="button" class="w-100 h-100">Add</button></a>
+			</div>
+            <div class="col-10">
               <nav>
                 <ul class="pagination pagination-sm m-0 justify-content-end">
                   <li class="page-item ms-1">
-                    <a th:href="@{/vendor/filter(page=${0},vdName=${vdName},ctry=${ctry})}" class="page-link"
+                    <a th:href="@{/vendor/filter(page=${0},vdName=${vdName},ctry=${ctry})}" class="page-link rounded-0"
                       aria-current="page">
                       <i class="fa-solid fa-backward-step"></i>
                     </a>
@@ -123,7 +124,7 @@
                   </li>
 
                   <li class="page-item ms-1">
-                    <a class="page-link"
+                    <a class="page-link rounded-0"
                       th:href="@{${ttPage > 1} ? @{/vendor/filter(page=${ttPage-1},vdName=${vdName},ctry=${ctry})} : @{#}} ">
                       <i class="fa-solid fa-forward-step"></i>
                     </a>

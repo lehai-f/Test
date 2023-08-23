@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <div class="container-fluid px-5 py-3">
+  <div class="container px-5 py-3">
     <div class="row rounded-top py-2" style="background-color: #bcbcbc">
       <div class="close-button " style="padding: 5px; border:black solid 1px; 
              width: 30px; border-radius: 7px;
@@ -40,7 +40,7 @@
           <div class="row">
             <div class="col-lg-5 col-xl-4 col-md-8 col-sm-12 mb-3">
               <div class="row justify-content-between mb-3">
-                <div class="col-5 fw-semibold textSty">Vendor Name<span style="color: red">*</span> :</div>
+                <div class="col-5 fw-semibold">Vendor Name<span style="color: red">*</span> :</div>
                 <input id="vendorID" type="hidden" th:field="*{vendorID}">
                 <input type="hidden" th:field="*{vdUpTime}">
                 <div class="col-7">
@@ -52,25 +52,24 @@
                 <span class="form-message text-danger text-end"></span>
               </div>
 
-              <div class="row justify-content-between">
-                <div class="col-5 fw-semibold textSty">Country :</div>
+              <div class="row justify-content-between mb-3">
+                <div class="col-5 fw-semibold">Country :</div>
                 <div class="col-7">
                   <div class="row">
                     <div class="col" th:if="${#lists.isEmpty(vendor.schedules)}">
                       <input type="hidden" th:field="*{country.countryID}">
-                      <select id="inputCountry" class="js-select2" aria-describedby="helpId"
+                      <select id="inputCountry" class="js-select2 form-select w-100 py-0" aria-describedby="helpId"
                         th:field="*{country.countryName}">
                         <option class="countryValue" th:each="c : ${countries}" th:value="${c.countryName}"
                           th:text="${c.countryName}"></option>
                       </select>
                       <p th:if="${#fields.hasErrors('country.countryName')}" class="text-danger m-0 p-0"
                         th:errors="*{country.countryName}"></p>
-                    </div>
-                    
-                    <div class="col mb-3" th:if="${!#lists.isEmpty(vendor.schedules)}">
+                    </div>                  
+                    <div class="col" th:if="${!#lists.isEmpty(vendor.schedules)}">
                       <input type="hidden" th:field="*{country.countryID}">
                       <input id="inputCountry" type="hidden" th:field="*{country.countryName}">
-                      <p class="text-end m-0 textSty" th:text="${vendor.country.countryName}"></p>
+                      <p style="font-size:20px;" class="text-end m-0" th:text="${vendor.country.countryName}"></p>
                       <p th:if="${#fields.hasErrors('country.countryName')}" class="text-danger m-0 p-0"
                         th:errors="*{country.countryName}"></p>
                     </div>
@@ -81,11 +80,11 @@
               </div>
 
               <div class="row justify-content-between mb-3">
-                <div class="col-6 fw-semibold textSty">Staff Strength<span style="color: red">*</span> :</div>
-                <div class="col-3 text-end">
+                <div class="col-6 fw-semibold ">Staff Strength<span style="color: red">*</span> :</div>
+                <div class="col-2 text-end ps-0">
                   <input id="staffTotal" type="number" class="form-control form-control-sm rounded-0" name=""
                     aria-describedby="helpId" placeholder="" th:field="*{staffStrength}"
-                    style="margin-left: 40%; width: 60%">
+                    style="width: 100%">
                   <p th:if="${#fields.hasErrors('staffStrength')}" class="text-danger m-0 p-0"
                     th:errors="*{staffStrength}"></p>
                 </div>
@@ -93,12 +92,12 @@
               </div>
 
               <div class="row justify-content-between">
-                <div class="col fw-semibold textSty">
+                <div class="col fw-semibold ">
 					Number of Working Days (Per Week)<span style="color: red">*</span> :</div>
-                <div class="col-3 text-end">
-                  <input id="workDay" type="number" class="form-control form-control-sm rounded-0" name=""
+                <div class="col-2 text-end ps-0">
+                  <input id="workDay" type="number" class="form-control form-control-sm rounded-0 " name=""
                     aria-describedby="helpId" placeholder="" th:field="*{numberOfWorkingDays}"
-                    style="margin-left: 40%; width: 60%">
+                    style="width: 100%">
                   <p th:if="${#fields.hasErrors('numberOfWorkingDays')}" class="text-danger m-0 p-0"
                     th:errors="*{numberOfWorkingDays}"></p>
                 </div>
@@ -108,7 +107,7 @@
           </div>
 
           <div class="row">
-            <div class="col fw-semibold mb-3 textSty">Agreed Fares Records Per Day</div>
+            <div class="col fw-semibold mb-3 ">Agreed Fares Records Per Day</div>
             <div class="table-responsive mb-2 px-4">
               <div th:if="${udError}" class="col text-center">
                 <p th:text="${udError}" class="error-message text-danger"></p>

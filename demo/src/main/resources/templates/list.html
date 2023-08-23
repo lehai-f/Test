@@ -18,7 +18,7 @@
 </head>
 
 <body>
-  <div class="container-fluid px-5 py-3">
+  <div class="container px-5 py-3">
     <div class="row rounded-top py-2" style="background-color: #bcbcbc">
       <div class="close-button " style="padding: 5px; border:black solid 1px; 
              width: 30px; border-radius: 7px;
@@ -35,26 +35,25 @@
       </div>
     </div>
     <div class="row px-3 py-4" style="background-color: #e3e3e3 ;">
-      <form th:action="@{/vendor/filter}" class="m-2" style="height:100px;">
-        <div class="row" style="height:49px;">
-          <div class="" style="width: 9%;">Vendor Name: </div>
-          <div style="width: 16%;">
-            <select list="selectName" id="inputName" type="text" class="js-select2 form-select rounded-0 " name="vdName" maxlength="50" >
-              <option class="text-center" selected value="All"> -----------All---------- </option>
+      <form th:action="@{/vendor/filter}" class="m-2" style="height:95px;">
+        <div class="row" style="height:45px;">
+          <div class="" style="width: 11%;">Vendor Name: </div>
+          <div style="width: 220px;">
+            <select id="inputName" type="text" class="js-select2 form-select py-0" name="vdName">
+              <option selected value=""> -----------All---------- </option>
               <option th:each="c : ${nameFilter}" th:value="${c.vendorName}" th:text="${c.vendorName}">
               </option>
             </select>
           </div>
-          <div style="width: 7%;">
+          <div style="width: 110px;">
             <button type="submit" class="w-100">Filter</button>
           </div>
         </div>
         <div class="row">
-          <div style="width: 9%;">Country: </div>
-          <div style="width: 16%;">
-            <select id="inputCountry" type="text" class="js-select2 form-select  rounded-0" name="ctry"
-              maxlength="50">
-              <option class="text-center" selected value="All"> -----------All---------- </option>
+          <div style="width: 11%;">Country: </div>
+          <div style="width: 220px;">
+            <select id="inputCountry" type="text" class="js-select2 form-select py-0" name="ctry">
+              <option selected value=""> -----------All---------- </option>
               <option class="countryValue" th:each="c : ${countries}" th:value="${c.countryName}"
                 th:text="${c.countryName}"></option>
             </select>
@@ -66,7 +65,7 @@
         <div th:if="${udError}" class="col-6 text-center">
           <p th:text="${udError}" class="error-message text-danger"></p>
         </div>
-        <table class="table-active table-bordered table-striped border-success text-center col-6">
+        <table class="table-active table-bordered table-striped border-success text-center col-7">
           <thead style="background-color: #bcbcbc;">
             <tr class="text-white">
               <th class="col-4">Vendor Name</th>
@@ -91,7 +90,7 @@
         </table>
       </div>
       <div class="col">
-        <div class="col-6">
+        <div class="col-7">
           <div class="row">
             <div class="col-2">
               <form><a th:href="@{/vendor/add}"><button type="button" class="w-100 h-100">Add</button></a></form>
@@ -99,7 +98,7 @@
             <div class="col-10">
               <nav>
                 <ul class="pagination pagination-sm m-0 justify-content-end">
-
+					
                   <li class="page-item ms-1">
                     <a th:href="@{/vendor/list(page=${0})}" class="page-link text-secondary rounded-0" aria-current="page">
                       <i class="fa-solid fa-backward-step"></i>

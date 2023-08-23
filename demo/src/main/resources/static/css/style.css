@@ -1,7 +1,7 @@
 body button {
 	color: black;
     background-image: linear-gradient(rgb(255, 255, 255), rgb(207, 207, 207));
-    border: 0.12em solid #3f6c95;
+    border: 1px solid #3f6c95;
     border-radius: 4px;
 }
 
@@ -47,10 +47,6 @@ body select {
 	border: 1px solid rgb(62, 62, 62) !important;
 }
 
-
-::placeholder {
-        text-align: center;
-}
 
 .modal-content {
 	width: 460px;
@@ -118,7 +114,9 @@ body select {
 }
 
 .form-select{
-	height: 32px !important;
+	height: 31px !important;
+	border: 1px solid #3f6c95 !important;
+	border-radius: 0;
 }
 
 .select2.select2-container {
@@ -135,15 +133,14 @@ body select {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    height: 34px;
-    margin-bottom: 15px;
+    height: 31px;
     outline: none !important;
     transition: all .15s ease-in-out;
   }
   
   .select2.select2-container .select2-selection .select2-selection__rendered {
     color: #333;
-    line-height: 32px;
+    line-height: 31px;
     padding-right: 33px;
   }
   
@@ -153,8 +150,8 @@ body select {
     -webkit-border-radius: 0 3px 3px 0;
     -moz-border-radius: 0 3px 3px 0;
     border-radius: 0 3px 3px 0;
-    height: 32px;
-    width: 33px;
+    height: 29px;
+    width: 28px;
   }
   
   .select2.select2-container.select2-container--open .select2-selection.select2-selection--single {
@@ -166,8 +163,6 @@ body select {
     -moz-border-radius: 0 3px 0 0;
     border-radius: 0 3px 0 0;
   }
-  
- 
   
   .select2-container .select2-dropdown {
     background: transparent;
@@ -210,7 +205,3 @@ body select {
  }
  
  
- .textSty{
-	 font-size: 17px;
-	 word-spacing: 4px;
- }
