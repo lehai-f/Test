@@ -46,9 +46,9 @@
                 <div class="col-7">
                   <input id="vendorName" type="text" class="form-control form-control-sm rounded-0 w-100"
                     aria-describedby="helpId" th:field="*{vendorName}" maxlength="50">
-                  <p th:if="${#fields.hasErrors('vendorName')}" class="text-danger m-0 p-0" th:errors="*{vendorName}">
-                  </p>
                 </div>
+                <p th:if="${#fields.hasErrors('vendorName')}" class="text-danger m-0 p-0 text-end" th:errors="*{vendorName}">
+                  </p>
                 <span class="form-message text-danger text-end"></span>
               </div>
 
@@ -63,9 +63,7 @@
                         <option class="countryValue" th:each="c : ${countries}" th:value="${c.countryName}"
                           th:text="${c.countryName}"></option>
                       </select>
-                      <p th:if="${#fields.hasErrors('country.countryName')}" class="text-danger m-0 p-0"
-                        th:errors="*{country.countryName}"></p>
-                    </div>                  
+                    </div>     
                     <div class="col" th:if="${!#lists.isEmpty(vendor.schedules)}">
                       <input type="hidden" th:field="*{country.countryID}">
                       <input id="inputCountry" type="hidden" th:field="*{country.countryName}">
@@ -73,21 +71,21 @@
                       <p th:if="${#fields.hasErrors('country.countryName')}" class="text-danger m-0 p-0"
                         th:errors="*{country.countryName}"></p>
                     </div>
-
                     <span class="form-message text-danger text-end"></span>
                   </div>
                 </div>
+                <p th:if="${#fields.hasErrors('country.countryName')}" class="text-danger m-0 text-end"
+                        th:errors="*{country.countryName}"></p>
               </div>
-
               <div class="row justify-content-between mb-3">
                 <div class="col-6 fw-semibold ">Staff Strength<span style="color: red">*</span> :</div>
                 <div class="col-2 text-end ps-0">
                   <input id="staffTotal" type="number" class="form-control form-control-sm rounded-0" name=""
                     aria-describedby="helpId" placeholder="" th:field="*{staffStrength}"
                     style="width: 100%">
-                  <p th:if="${#fields.hasErrors('staffStrength')}" class="text-danger m-0 p-0"
-                    th:errors="*{staffStrength}"></p>
                 </div>
+                <p th:if="${#fields.hasErrors('staffStrength')}" class="text-danger m-0 p-0 text-end"
+                    th:errors="*{staffStrength}"></p>
                 <span class="form-message text-danger text-end"></span>
               </div>
 
@@ -97,10 +95,10 @@
                 <div class="col-2 text-end ps-0">
                   <input id="workDay" type="number" class="form-control form-control-sm rounded-0 " name=""
                     aria-describedby="helpId" placeholder="" th:field="*{numberOfWorkingDays}"
-                    style="width: 100%">
-                  <p th:if="${#fields.hasErrors('numberOfWorkingDays')}" class="text-danger m-0 p-0"
-                    th:errors="*{numberOfWorkingDays}"></p>
+                    style="width: 100%">   
                 </div>
+                <p th:if="${#fields.hasErrors('numberOfWorkingDays')}" class="text-danger m-0 p-0 text-end"
+                    th:errors="*{numberOfWorkingDays}"></p>
                 <span class="form-message text-danger text-end"></span>
               </div>
             </div>
@@ -220,30 +218,29 @@
                 <td class="py-1">
                     <input type="date" class="form-control form-control-sm rounded-0 w-75" aria-describedby="helpId"
                      id="schedules${agreedCount - 1}.startDate" name="schedules[${agreedCount - 1}].startDate" style="margin-left: 12.5%;">
-                      <p id="helpId" class="form-message form-text text-sm text-danger m-0"></p>
+                      <p id="helpId" class="form-message form-text text-danger m-0"></p>
                       <span th:if="\${#fields.hasErrors('schedules[${agreedCount - 1}].startDate')}" class="text-danger"></span>                 
                 </td>
                 <td>
                     <input type="date" class="form-control form-control-sm rounded-0 w-75" aria-describedby="helpId"
                      id="schedules${agreedCount - 1}.endDate" name="schedules[${agreedCount - 1}].endDate" style="margin-left: 12.5%;">
-                     <p id="helpId" class="form-message form-text text-sml text-danger m-0"></p>
+                     <p id="helpId" class="form-message form-text text-danger m-0"></p>
                      <span th:if="\${#fields.hasErrors('schedules[${agreedCount - 1}].endDate')}" class="text-danger"></span>
                 </td>
                 <td>
                     <input type="number" class="form-control form-control-sm rounded-0 w-75" aria-describedby="helpId"
                      id="schedules${agreedCount - 1}.numberStaff"  name="schedules[${agreedCount - 1}].numberStaff" value="0" style="margin-left: 12.5%;">
-                     <p id="helpId" class="form-message form-text text-sm text-danger m-0"></p>
+                     <p id="helpId" class="form-message form-text text-danger m-0"></p>
                      <span th:if="\${#fields.hasErrors('schedules[${agreedCount - 1}].numberStaff')}" class="text-danger"></span>  
                 </td>
                 <td>
                     <input type="number" class="form-control form-control-sm rounded-0 w-75" aria-describedby="helpId"
                      id="schedules${agreedCount - 1}.recordPerDay"  name="schedules[${agreedCount - 1}].recordPerDay" value="0" style="margin-left: 12.5%;">
-                     <p id="helpId" class="form-message form-text text-sm text-danger m-0"></p>
+                     <p id="helpId" class="form-message form-text text-danger m-0"></p>
                      <span th:if="\${#fields.hasErrors('schedules[${agreedCount - 1}].recordPerDay')}" class="text-danger"></span>
                 </td>
                 <td>
-                    <a href="javascript:void(0);" onclick="showConfirmation(this)" data-bs-toggle="modal"
-                        data-bs-target="#confirmModal"><img src="/img/x.png" alt="" style="height: 30px;"></a>
+                    <a href="javascript:void(0);" onclick="showConfirmation(this)"><img src="/img/x.png" alt="" style="height: 30px;"></a>
                     <input type="hidden" name="schedules[${agreedCount - 1}].scheduleID" value="0">   
                 </td>
             </tr>
@@ -252,36 +249,6 @@
       })
     });
   </script>
-
-  <script>
-    function showConfirmation(element) {
-      $('#confirmModal').modal('show');
-      // Lưu ID vào biến toàn cục để sử dụng trong hàm confirmDelete()
-      var id = $(element).next().val();
-      window.deleteId = id;
-      window.element = element;
-    }
-    function confirmDel() {
-      var id = window.deleteId;
-      var element = window.element;
-      if (id == 0) {
-        delete1(element);
-      } else {
-        var vdID = $("#vendorID").val();
-        var absolutePath = window.location.origin + "/schedule/delete?id=" + id + "&vdID=" + vdID;
-        window.location.href = absolutePath;
-      }
-      $('#confirmModal').modal('hide');
-      $("document").ready(function () {
-        $(".modal-backdrop").remove();
-      })
-    }
-
-    function delete1(e) {
-      e.closest("tr").remove();
-    }
-  </script>
-
 </body>
 
 </html>

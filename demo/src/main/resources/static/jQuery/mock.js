@@ -66,8 +66,33 @@ $(document).ready(function () {
   });
 });
 
+  function showConfirmation(element) {
+      var id = $(element).next().val();
+      window.deleteId = id;
+      window.element = element;
+      $('#confirmModal').modal('show');
+    }
+    
+    function confirmDel() {
+      var id = window.deleteId;
+      var element = window.element;
+      if (id == 0) {
+        delete1(element);
+      } else {
+        var vdID = $("#vendorID").val();
+        var absolutePath = window.location.origin + "/schedule/delete?id=" + id + "&vdID=" + vdID;
+        window.location.href = absolutePath;
+      }
+      $('#confirmModal').modal('hide');
+      $("document").ready(function () {
+        $(".modal-backdrop").remove();
+      })
+    }
 
-
+    function delete1(e) {
+      e.closest("tr").remove();
+    }
+3
 /*var list = [];
 var listID = [];
 var list1 = [];

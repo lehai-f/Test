@@ -27,7 +27,7 @@ body button {
 
 .pagination .page-item a.page-link {
     background-image: linear-gradient(rgb(255, 255, 255), rgb(207, 207, 207));
-    border: 1px solid rgb(74, 74, 74);
+    border: 1px solid #3f6c95;
 }
 
 .focusID {
