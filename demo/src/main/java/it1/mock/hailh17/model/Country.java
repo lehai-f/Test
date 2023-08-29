@@ -18,22 +18,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Country entity
+ * @author HaiLH17
+ * @BirthDate: 1994/07/07
+ */
 @Entity
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Country {
-	@Id
-	@Column(name = "Country_ID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long countryID;
-	
-	@Column(name = "Country_Name", columnDefinition = "Nvarchar(50)")
-	@NotBlank(message = "Country Name must be entered")
-	private String countryName;
-	
-	@OneToMany(mappedBy = "country",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
-	private Set<Vendor> vendors  = new HashSet<Vendor>();
-	
+    @Id
+    @Column(name = "Country_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long countryID;
+
+    @Column(name = "Country_Name", columnDefinition = "Nvarchar(50)")
+    @NotBlank(message = "Country Name must be entered")
+    private String countryName;
+
+    @OneToMany(mappedBy = "country", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private Set<Vendor> vendors = new HashSet<Vendor>();
+
 }

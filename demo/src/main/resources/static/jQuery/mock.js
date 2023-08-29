@@ -1,4 +1,10 @@
  $(document).ready(function () {  
+	 
+	 $("#vendorName").on("change",function(){
+		  $('#vendorName').parent().first().next(".form-message").text("");
+	 })
+	 
+	 var datePattern =/^\d{4}-\d{2}-\d{2}$/;
 	 $("#formInput").on("submit", function(e) {
 		 e.preventDefault();
 		 var flag = true;
@@ -11,7 +17,6 @@
 			 $('#inputCountry').parent().first().next(".form-message").text("Country must be entered");
 			 flag = false;
 		 }
-		 console.log($('#inputCountry').val())
 		 
 		 if(!$('#staffTotal').val()){
 			 $('#staffTotal').parent().first().next(".form-message").text("Staff Strenght must be entered");
@@ -24,11 +29,20 @@
 		 }
 		 var agreedCount = $("#agreedBody").children();
 		  for (var i = 0; i < agreedCount.length; i++) {
-			  if(!$("#schedules"+i+"\\.startDate").val()){
+        var startD = $("#schedules"+i+"\\.startDate").val();
+     	var endD = $("#schedules"+i+"\\.endDate").val();
+			   if(!$("#schedules"+i+"\\.startDate").val()){
 				 $("#schedules"+i+"\\.startDate").next(".form-message").text("Start date must be entered");
 				 flag = false;
 		 	   }
-		 	   
+	
+	           if(!datePattern.test(startD)){
+	            $("#schedules"+i+"\\.startDate").next(".form-message").text("Start date Invalid");
+	           }
+	           if(!datePattern.test(endD)){
+	            $("#schedules"+i+"\\.endDate").next(".form-message").text("End date Invalid");
+	           }
+	           
 		 	   if(!$("#schedules"+i+"\\.endDate").val()){
 				 $("#schedules"+i+"\\.endDate").next(".form-message").text("End date must be entered");
 				 flag = false;

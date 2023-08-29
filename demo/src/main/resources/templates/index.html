@@ -1,12 +1,29 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Index</title>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{/fontawesome/css/all.css}">
+  <link rel="stylesheet" th:href="@{/css/select2.min.css}">
+  <link rel="stylesheet" th:href="@{/css/select2.min2.css}">
+
 </head>
+
 <body>
-	<div class="text-center">
+	<div class="row">
+		<div class="col-6 text-end">
 	<a th:href="@{/vendor/list}"> <h1>List</h1></a>
+	</div>
+	<div class="col-6">
+		<h1><-- Bấm vô đây</h1>
+	</div>
 	</div>
 </body>
 </html>
